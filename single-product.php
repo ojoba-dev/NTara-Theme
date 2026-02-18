@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php  ?>
 
 <div class="page-wrapper">
 

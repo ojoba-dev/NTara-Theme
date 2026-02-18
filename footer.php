@@ -41,6 +41,14 @@
     </div>
 </footer>
 
+<div id="product-modal" class="product-modal" role="dialog" aria-modal="true" hidden>
+    <div class="product-modal-overlay"></div>
+    <div class="product-modal-box">
+        <button class="product-modal-close" aria-label="Close">&times;</button>
+        <div class="product-modal-body"></div>
+    </div>
+</div>
+
 <?php wp_footer(); ?>
 </body>
 </html>

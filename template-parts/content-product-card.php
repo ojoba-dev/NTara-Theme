@@ -8,5 +8,7 @@
     </div>
     <p class="card-price">$<?php echo esc_html(get_post_meta(get_the_ID(), '_price', true)); ?></p>
     <h2 class="card-title"><?php the_title(); ?></h2>
-    <a href="<?php the_permalink(); ?>" class="card-btn">View More Info</a>
+    <a href="<?php the_permalink(); ?>"
+       class="card-btn product-modal-trigger"
+       data-url="<?php the_permalink(); ?>">View More Info</a>
 </div>

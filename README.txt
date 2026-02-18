@@ -1,58 +1,101 @@
-Ntara Store - WordPress Theme
+Ntara Store — WordPress Theme
 ==============================
-Version:     1.0.0
-Author:      Ntara Partners
-Description: Custom WordPress theme for Ntara Store.
+Version:  1.0.0
+Author:   Osman Jolón
 
 
-STRUCTURE
----------
-style.css              Theme header (required by WordPress)
-functions.php          Loads all /inc/ files
-index.php              Fallback template
-screenshot.png         Admin thumbnail (880x660 px)
+PROJECT STRUCTURE
+-----------------
 
-header.php             Site header with top bar, logo, nav, search
-footer.php             Site footer with columns and social links
-sidebar.php            Sidebar with search and category menu
+ntara-store/
+├── style.css                          WP theme header (required)
+├── functions.php                      Loads everything in /inc/
+├── index.php                          Fallback template
+├── header.php                         Top bar, logo, nav, search
+├── footer.php                         Footer columns + social links
+├── sidebar.php                        Search + category filter
+├── archive-product.php                Store page — product grid + sort bar
+├── single-product.php                 Single product
+├── search.php                         Search results
+├── taxonomy-product_category.php      Category archive
+├── screenshot.png                     Theme preview in WP admin (880×660)
+├── package.json                       Node deps
+├── gulpfile.js                        Gulp config
+│
+├── inc/
+│   ├── enqueue.php       Theme setup, styles & scripts
+│   ├── post-types.php    'product' CPT + 'product_category' taxonomy
+│   ├── meta-boxes.php    Price field for products
+│   ├── queries.php       Category filtering & sorting logic
+│   └── filters.php       Misc WP filters
+│
+├── template-parts/
+│   ├── content-product-card.php      Product card (used in the grid)
+│   ├── content-product-single.php    Single product layout
+│   └── content-no-results.php        Empty state
+│
+├── assets/                           Source files — edit these
+│   ├── less/
+│   │   ├── public.less               Imports the partials below
+│   │   ├── common.less               Shared base
+│   │   ├── admin.less                Admin styles
+│   │   └── public/
+│   │       ├── _variables.less       Colors, fonts, breakpoints
+│   │       ├── _reset.less           CSS reset
+│   │       ├── _layout.less          Header, sidebar, footer
+│   │       └── _components.less      Cards, sort bar, pagination
+│   └── js/
+│       └── public/
+│           └── main.js               Category filter + sort
+│
+└── dist/                             Compiled output — don't touch this manually
+    └── assets/
+        ├── css/
+        │   ├── common.css
+        │   ├── public.css
+        │   ├── admin.css
+        │   └── maps/
+        └── js/
+            └── public.min.js
 
-archive-product.php    Product listing page (grid + sort)
-single-product.php     Single product page
-search.php             Search results page
 
-template-parts/
-  content-product-card.php    Product card component (used in grid)
-  content-product-single.php  Single product content
-  content-no-results.php      Empty state message
+GETTING STARTED
+---------------
+You need Node.js installed first (https://nodejs.org). Then from the theme folder:
 
-inc/
-  enqueue.php    Theme setup, stylesheet & script registration
-  post-types.php Custom post type (product) and taxonomy (product_category)
-  meta-boxes.php Price meta box for products
-  queries.php    Query modifications (sort by title / price)
-  filters.php    Additional WordPress filters
+    npm install
 
-assets/
-  css/main.css         Reset and base styles
-  css/layout.css       Structural layout (header, sidebar, footer)
-  css/components.css   UI components (cards, sort bar, pagination)
-  js/main.js           Theme JavaScript (sort auto-submit)
-  images/              Theme images
+Run that once and you're set.
 
 
-SETUP
------
-1. Upload the theme folder to /wp-content/themes/
-2. Activate in WordPress: Appearance > Themes
-3. Go to Appearance > Menus:
-   - Assign a menu to "Primary Navigation"   (header nav)
-   - Assign a menu to "Sidebar Categories"   (sidebar links)
-4. Add products under Products > Add New
-5. Enter a price in the "Price" meta box on each product
-6. (Optional) Add a screenshot.png (880x660 px) for the admin preview
+GULP COMMANDS
+-------------
+    gulp              Build everything — LESS to CSS, JS minified
+    gulp css          CSS only
+    gulp js           JS only
+    gulp clean        Wipe dist/ and start fresh
+    npm run build     Same as gulp
+
+Any time you change something in assets/, just run gulp again.
 
 
-REQUIREMENTS
-------------
-WordPress 5.0+
-PHP 7.4+
+UPLOADING TO WORDPRESS
+-----------------------
+Zip the theme but leave out node_modules/ — it's massive and WordPress doesn't use it.
+Make sure dist/ is included, that's where the actual compiled CSS/JS lives.
+
+Upload via WP Admin → Appearance → Themes → Add New → Upload Theme,
+or just drop the folder in /wp-content/themes/ over FTP.
+
+Once it's active:
+- Appearance → Menus → assign a menu to "Primary Navigation"
+- Products → Add New to add products, fill in the Price field on each one
+- Appearance → Customize → Site Identity to upload the logo
+- Drop a screenshot.png (880×660) in the root if you want a preview in the theme list
+
+
+WordPress Access
+----------------
+url:      https://red-termite-205607.hostingersite.com/wp-admin/
+user:     info@ntara.com
+password: Yng#yLOy2d)64DCSQn*snGKc

@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // =========================================================
-    // Category filter — toggle categories in the URL without
-    // leaving the store page (/store/?category[]=slug)
-    // =========================================================
+    // category filter — sidebar links update the URL, no page reload needed
     document.querySelectorAll('.sidebar-filter-link').forEach(function (link) {
         link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -33,10 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // =========================================================
-    // Sort — inject hidden inputs so active category filters
-    // are preserved when the sort form is submitted
-    // =========================================================
+    // sort — carry over active category filters when the sort form submits
     var sortSelect = document.getElementById('ntara-sort');
     if (sortSelect) {
         var sortForm   = sortSelect.closest('form');

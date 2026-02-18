@@ -9,10 +9,7 @@ const concat = require('gulp-concat');
 const autoprefixer = require('gulp-autoprefixer');
 
 
-// === CSS ===
-// Bug fixes applied:
-//   1. sourcemaps.init() added before less() (was missing)
-//   2. autoprefixer() moved before sourcemaps.write() (was after — did nothing)
+// CSS — sourcemaps.init() goes before less(), autoprefixer before sourcemaps.write()
 
 function css_common() {
     return src('./assets/less/common.less')
@@ -44,8 +41,7 @@ function css_admin() {
         .pipe(dest('dist/assets/css'))
 }
 
-// === JS ===
-// allowEmpty: true added so empty directories don't throw errors
+// JS — allowEmpty so it doesn't crash if a folder has no files yet
 
 function js_common() {
     return src('./assets/js/common/*.js', { sourcemaps: true, allowEmpty: true })
@@ -65,13 +61,13 @@ function js_admin() {
         .pipe(dest('dist/assets/js', { sourcemaps: true }))
 }
 
-// === CLEAN ===
+// clean
 function clean_dist() {
     return src(['dist/*'], { read: false })
         .pipe(clean());
 }
 
-// === MOVE (static assets) ===
+// copy static assets to dist
 var filesToMove = [
     './assets/fonts/*.*',
     './assets/images/*.*',
@@ -99,7 +95,7 @@ function move() {
         .pipe(dest('dist'));
 }
 
-// === EXPORTS ===
+// tasks
 exports.clean      = clean_dist;
 exports.move       = move;
 exports.js_common  = js_common;
